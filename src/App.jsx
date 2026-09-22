@@ -29,7 +29,7 @@ function App() {
         const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
           method: "POST",
           headers: { "Content-Type": "application/json", "Authorization": `Bearer ${GROQ_KEY}` },
-          body: JSON.stringify({ model: "llama-3.1-8b-instant", messages: [{ role: "user", content: userText }] })
+          body: JSON.stringify({ model: "openai/gpt-oss-20b", messages: [{ role: "user", content: userText }] })
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error?.message);
