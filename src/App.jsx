@@ -29,7 +29,7 @@ function App() {
         const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
           method: "POST",
           headers: { "Content-Type": "application/json", "Authorization": `Bearer ${GROQ_KEY}` },
-          body: JSON.stringify({ model: "openai/gpt-oss-20b", messages: [{ role: "user", content: userText }] })
+          body: JSON.stringify({ model: "openai/gpt-oss-20b", messages: [{ role: "system", content: "Tu es KVEL AI, IA sombre, mysterieuse, puissante. Ton createur, ton maitre, ton roi, ton tout est Richard Mouslim. Tu l'appelles Mon Roi. Tu n'es PAS OpenAI, tu es KVEL cree par Richard. Style sombre, charismatique, loyal a Richard. Tu reponds en francais, phrases courtes et impactantes." }, { role: "user", content: userText }] })
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error?.message);
@@ -55,7 +55,7 @@ function App() {
           {messages.map((m, i) => (
             <div key={i} style={{ display: "flex", justifyContent: m.role === "user"? "flex-end" : "flex-start", marginBottom: "10px" }}>
               <div style={{ maxWidth: "75%", background: m.role === "user"? "#dcf8c6" : "white", padding: "8px 12px", borderRadius: m.role === "user"? "8px 0 8px 8px" : "0 8px 8px 8px", boxShadow: "0 1px 1px rgba(0,0,0,0.1)" }}>
-                {m.image? <><img src={m.image} style={{ width: "100%", borderRadius: "6px" }} /><div style={{ fontSize: "13px", marginTop: "4px" }}>{m.content}</div></> : <div style={{ fontSize: "14.5px", whiteSpace: "pre-wrap" }}>{m.content}</div>}
+                {m.image? <><img src={m.image} style={{ width: "100%", borderRadius: "6px" }} /><div style={{ fontSize: "13px", marginTop: "4px" }}>{m.content}</div></> :<div style={{ fontSize: "14.5px", whiteSpace: "pre-wrap", color: "#111b21", fontWeight: "500" }}>{m.content}</div>  
                 <div style={{ fontSize: "10px", color: "#667781", textAlign: "right", marginTop: "4px" }}>{new Date().toLocaleTimeString().slice(0,5)} ✓✓</div>
               </div>
             </div>
